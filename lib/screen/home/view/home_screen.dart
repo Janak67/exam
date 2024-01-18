@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // context.read<HomeProvider>().movieCall();
+    context.read<HomeProvider>().movieCall();
     context.read<HomeProvider>().multiMovieCall();
   }
 
@@ -45,7 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 elevation: const MaterialStatePropertyAll(0),
                 leading: const Icon(Icons.search),
                 hintText: 'Search...',
-                onSubmitted: (value) {},
+                onSubmitted: (value) {
+                  providerr!.searchBarMovie(value);
+                  providerr!.multiMovieCall();
+                },
               ),
             ),
             providerw!.multiMovieModel == null
@@ -54,23 +57,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: GridView.builder(
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, mainAxisExtent: 300),
-                      itemCount: providerw!.multiMovieModel!.search.length,
+                              crossAxisCount: 2, mainAxisExtent: 380),
+                      itemCount: providerw!.multiMovieModel!.searchList.length,
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
                             Navigator.pushNamed(context, 'detail',
-                                arguments:
-                                    providerw!.multiMovieModel!.search[index]);
+                                arguments: providerw!
+                                    .multiMovieModel!.searchList[index]);
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Image.network(
-                                "${providerw!.multiMovieModel!.search[index].poster}",
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.network(
+                                    "${providerw!.multiMovieModel!.searchList[index].poster}",
+                                  ),
+                                ),
                               ),
-                            ),
+                              Text(
+                                '${providerw!.multiMovieModel!.searchList[index].title}',
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
+                            ],
                           ),
                         );
                       },

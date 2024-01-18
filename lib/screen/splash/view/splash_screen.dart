@@ -20,9 +20,19 @@ class _SplashScreenState extends State<SplashScreen> {
       child: Scaffold(
         backgroundColor: Colors.black,
         body: Center(
-          child: Image.asset(
-            "assets/img/logo.png",
-            height: 100,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/img/logo.png",
+                height: 100,
+              ),
+              const Text(
+                'Movie',
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              )
+            ],
           ),
         ),
       ),
