@@ -1,6 +1,5 @@
 class HomeModel {
-  int? poster;
-  String? title,
+  String? title,poster,
       year,
       genre,
       director,

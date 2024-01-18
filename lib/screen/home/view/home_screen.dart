@@ -67,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .multiMovieModel!.searchList[index]);
                           },
                           child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(8),
